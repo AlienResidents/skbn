@@ -1,8 +1,7 @@
-[![Release](https://img.shields.io/github/release/maorfr/skbn.svg)](https://github.com/maorfr/skbn/releases)
-[![Travis branch](https://img.shields.io/travis/maorfr/skbn/master.svg)](https://travis-ci.org/maorfr/skbn)
-[![Docker Pulls](https://img.shields.io/docker/pulls/maorfr/skbn.svg)](https://hub.docker.com/r/maorfr/skbn/)
-[![Go Report Card](https://goreportcard.com/badge/github.com/maorfr/skbn)](https://goreportcard.com/report/github.com/maorfr/skbn)
-[![license](https://img.shields.io/github/license/maorfr/skbn.svg)](https://github.com/maorfr/skbn/blob/master/LICENSE)
+[![Release](https://img.shields.io/github/release/AlienResidents/skbn.svg)](https://github.com/AlienResidents/skbn/releases)
+[![Docker Pulls](https://img.shields.io/docker/pulls/AlienResidents/skbn.svg)](https://hub.docker.com/r/AlienResidents/skbn/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/AlienResidents/skbn)](https://goreportcard.com/report/github.com/AlienResidents/skbn)
+[![license](https://img.shields.io/github/license/AlienResidents/skbn.svg)](https://github.com/AlienResidents/skbn/blob/master/LICENSE)
 
 # Skbn
 
@@ -12,7 +11,6 @@ Skbn currently supports the following providers:
 
 * AWS S3
 * Minio S3
-* Azure Blob Storage
 * Google Cloud Storage
 
 ## Install
@@ -24,13 +22,13 @@ Skbn currently supports the following providers:
 
 ### From a release
 
-Download the latest release from the [Releases page](https://github.com/maorfr/skbn/releases) or use it with a [Docker image](https://hub.docker.com/r/maorfr/skbn)
+Download the latest release from the [Releases page](https://github.com/AlienResidents/skbn/releases) or use it with a [Docker image](https://hub.docker.com/r/AlienResidents/skbn)
 
 ### From source
 
 ```
-mkdir -p $GOPATH/src/github.com/maorfr && cd $_
-git clone https://github.com/maorfr/skbn.git && cd skbn
+mkdir -p $GOPATH/src/github.com/AlienResidents && cd $_
+git clone https://github.com/AlienResidents/skbn.git && cd skbn
 make
 ```
 
@@ -49,22 +47,6 @@ skbn cp \
 ```
 skbn cp \
     --src s3://<bucket>/<path> \
-    --dst k8s://<namespace>/<podName>/<containerName>/<path>
-```
-
-### Copy files from Kubernetes to Azure Blob Storage
-
-```
-skbn cp \
-    --src k8s://<namespace>/<podName>/<containerName>/<path> \
-    --dst abs://<account>/<container>/<path>
-```
-
-### Copy files from Azure Blob Storage to Kubernetes
-
-```
-skbn cp \
-    --src abs://<account>/<container>/<path> \
     --dst k8s://<namespace>/<podName>/<containerName>/<path>
 ```
 
@@ -115,22 +97,6 @@ AWS_S3_FORCE_PATH_STYLE=true # enforce path style bucket access
 
 ## Added bonus section
 
-### Copy files from S3 to Azure Blob Storage
-
-```
-skbn cp \
-    --src s3://<bucket>/<path> \
-    --dst abs://<account>/<container>/<path>
-```
-
-### Copy files from Azure Blob Storage to S3
-
-```
-skbn cp \
-    --src abs://<account>/<container>/<path> \
-    --dst s3://<bucket>/<path>
-```
-
 ### Copy files from Kubernetes to Kubernetes
 
 ```
@@ -145,14 +111,6 @@ skbn cp \
 skbn cp \
     --src s3://<bucket>/<path> \
     --dst s3://<bucket>/<path>
-```
-
-### Copy files from Azure Blob Storage to Azure Blob Storage
-
-```
-skbn cp \
-    --src abs://<account>/<container>/<path> \
-    --dst abs://<account>/<container>/<path>
 ```
 
 ## Credentials
@@ -170,10 +128,6 @@ Skbn tries to get credentials in the following order:
 
 Skbn uses the default AWS [credentials chain](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html).
 In addition, the `AWS_REGION` environment variable should be set (default is `eu-central-1`).
-
-### Azure Blob Storage
-
-Skbn uses `AZURE_STORAGE_ACCOUNT` and `AZURE_STORAGE_ACCESS_KEY` environment variables for authentication.
 
 ### Google Cloud Storage
 
